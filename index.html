@@ -386,78 +386,126 @@
                     <text x="350" y="70" style="font-size: 11px; fill: var(--warm-gray); opacity: 0.7;">Table 1 (Sections A-G)</text>
                     <text x="350" y="330" style="font-size: 11px; fill: var(--warm-gray); opacity: 0.7;">Table 2 (Sections A-G)</text>
                     
-                    <!-- Sweetheart Table (elegant rounded rectangle) -->
+                    <!-- Sweetheart Table -->
                     <rect class="table table-section" id="sweetheart" x="60" y="90" width="80" height="50" rx="4"/>
                     <text x="100" y="120" class="table-label" style="font-size: 12px;">Scott &</text>
                     <text x="100" y="133" class="table-label" style="font-size: 12px;">Melinda</text>
                     
-                    <!-- Table 1 - Individual sections (A-G) -->
-                    <!-- Section A (closest to sweetheart) -->
-                    <rect class="table table-section" id="section-1-A" x="200" y="90" width="60" height="120" rx="3"/>
-                    <text x="230" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">A</text>
+                    <!-- Table 1 - Long continuous table -->
+                    <rect class="table-base" x="200" y="120" width="480" height="60" rx="3" fill="var(--white)" stroke="var(--warm-gray)" stroke-width="1.5"/>
                     
-                    <!-- Section B -->
-                    <rect class="table table-section" id="section-1-B" x="270" y="90" width="60" height="120" rx="3"/>
-                    <text x="300" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">B</text>
+                    <!-- Table 1 Section overlays and chairs -->
+                    <rect class="section-overlay" id="section-1-A" x="200" y="100" width="68" height="100" rx="2"/>
+                    <rect x="210" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="240" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="234" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">A</text>
+                    <rect x="210" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="240" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
-                    <!-- Section C -->
-                    <rect class="table table-section" id="section-1-C" x="340" y="90" width="60" height="120" rx="3"/>
-                    <text x="370" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">C</text>
+                    <rect class="section-overlay" id="section-1-B" x="268" y="100" width="68" height="100" rx="2"/>
+                    <rect x="278" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="308" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="302" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">B</text>
+                    <rect x="278" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="308" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
-                    <!-- Section D -->
-                    <rect class="table table-section" id="section-1-D" x="410" y="90" width="60" height="120" rx="3"/>
-                    <text x="440" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">D</text>
+                    <rect class="section-overlay" id="section-1-C" x="336" y="100" width="68" height="100" rx="2"/>
+                    <rect x="346" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="376" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="370" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">C</text>
+                    <rect x="346" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="376" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
-                    <!-- Section E -->
-                    <rect class="table table-section" id="section-1-E" x="480" y="90" width="60" height="120" rx="3"/>
-                    <text x="510" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">E</text>
+                    <rect class="section-overlay" id="section-1-D" x="404" y="100" width="68" height="100" rx="2"/>
+                    <rect x="414" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="444" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="438" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">D</text>
+                    <rect x="414" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="444" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
-                    <!-- Section F -->
-                    <rect class="table table-section" id="section-1-F" x="550" y="90" width="60" height="120" rx="3"/>
-                    <text x="580" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">F</text>
+                    <rect class="section-overlay" id="section-1-E" x="472" y="100" width="68" height="100" rx="2"/>
+                    <rect x="482" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="512" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="506" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">E</text>
+                    <rect x="482" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="512" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
-                    <!-- Section G -->
-                    <rect class="table table-section" id="section-1-G" x="620" y="90" width="60" height="120" rx="3"/>
-                    <text x="650" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">G</text>
+                    <rect class="section-overlay" id="section-1-F" x="540" y="100" width="68" height="100" rx="2"/>
+                    <rect x="550" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="580" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="574" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">F</text>
+                    <rect x="550" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="580" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    
+                    <rect class="section-overlay" id="section-1-G" x="608" y="100" width="68" height="100" rx="2"/>
+                    <rect x="618" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="648" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="642" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">G</text>
+                    <rect x="618" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="648" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
                     <!-- Divider -->
                     <line x1="50" y1="270" x2="690" y2="270" stroke="var(--warm-gray)" stroke-width="1" opacity="0.2" stroke-dasharray="4 4"/>
                     
-                    <!-- Table 2 - Individual sections (A-G) -->
-                    <!-- Section A (closest to sweetheart) -->
-                    <rect class="table table-section" id="section-2-A" x="200" y="350" width="60" height="120" rx="3"/>
-                    <text x="230" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">A</text>
+                    <!-- Table 2 - Long continuous table -->
+                    <rect class="table-base" x="200" y="380" width="480" height="60" rx="3" fill="var(--white)" stroke="var(--warm-gray)" stroke-width="1.5"/>
                     
-                    <!-- Section B -->
-                    <rect class="table table-section" id="section-2-B" x="270" y="350" width="60" height="120" rx="3"/>
-                    <text x="300" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">B</text>
+                    <!-- Table 2 Section overlays and chairs -->
+                    <rect class="section-overlay" id="section-2-A" x="200" y="360" width="68" height="100" rx="2"/>
+                    <rect x="210" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="240" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="234" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">A</text>
+                    <rect x="210" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="240" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
-                    <!-- Section C -->
-                    <rect class="table table-section" id="section-2-C" x="340" y="350" width="60" height="120" rx="3"/>
-                    <text x="370" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">C</text>
+                    <rect class="section-overlay" id="section-2-B" x="268" y="360" width="68" height="100" rx="2"/>
+                    <rect x="278" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="308" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="302" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">B</text>
+                    <rect x="278" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="308" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
-                    <!-- Section D -->
-                    <rect class="table table-section" id="section-2-D" x="410" y="350" width="60" height="120" rx="3"/>
-                    <text x="440" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">D</text>
+                    <rect class="section-overlay" id="section-2-C" x="336" y="360" width="68" height="100" rx="2"/>
+                    <rect x="346" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="376" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="370" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">C</text>
+                    <rect x="346" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="376" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
-                    <!-- Section E -->
-                    <rect class="table table-section" id="section-2-E" x="480" y="350" width="60" height="120" rx="3"/>
-                    <text x="510" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">E</text>
+                    <rect class="section-overlay" id="section-2-D" x="404" y="360" width="68" height="100" rx="2"/>
+                    <rect x="414" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="444" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="438" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">D</text>
+                    <rect x="414" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="444" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
-                    <!-- Section F -->
-                    <rect class="table table-section" id="section-2-F" x="550" y="350" width="60" height="120" rx="3"/>
-                    <text x="580" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">F</text>
+                    <rect class="section-overlay" id="section-2-E" x="472" y="360" width="68" height="100" rx="2"/>
+                    <rect x="482" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="512" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="506" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">E</text>
+                    <rect x="482" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="512" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
-                    <!-- Section G -->
-                    <rect class="table table-section" id="section-2-G" x="620" y="350" width="60" height="120" rx="3"/>
-                    <text x="650" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">G</text>
+                    <rect class="section-overlay" id="section-2-F" x="540" y="360" width="68" height="100" rx="2"/>
+                    <rect x="550" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="580" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="574" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">F</text>
+                    <rect x="550" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="580" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
                     
-                    <!-- Kids Table (small, elegant) -->
-                    <circle class="table table-section" id="kidsTable" cx="100" y="250" r="30"/>
+                    <rect class="section-overlay" id="section-2-G" x="608" y="360" width="68" height="100" rx="2"/>
+                    <rect x="618" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="648" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <text x="642" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">G</text>
+                    <rect x="618" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <rect x="648" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    
+                    <!-- Kids Table -->
+                    <circle class="table table-section" id="kidsTable" cx="100" cy="250" r="30"/>
                     <text x="100" y="253" class="table-label" style="font-size: 11px;">Kids</text>
                     <text x="100" y="266" class="table-label" style="font-size: 11px;">Table</text>
                     
-                    <!-- Dance Floor indicator -->
+                    <!-- Dance Floor -->
                     <rect x="60" y="520" width="100" height="60" fill="none" stroke="var(--warm-gray)" stroke-width="1.5" stroke-dasharray="5 5" rx="3" opacity="0.4"/>
                     <text x="110" y="555" class="table-label" style="font-size: 11px; opacity: 0.6;">Dance Floor</text>
                 </svg>
