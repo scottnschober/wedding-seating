@@ -233,26 +233,33 @@
         }
 
         .table {
-            fill: var(--sand);
+            fill: var(--white);
             stroke: var(--warm-gray);
-            stroke-width: 2;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            stroke-width: 1.5;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .table.highlight {
+        .table-section {
+            cursor: default;
+        }
+
+        .table.highlight,
+        .table-section.highlight {
             fill: var(--accent);
             stroke: var(--accent);
-            stroke-width: 3;
-            filter: drop-shadow(0 4px 12px rgba(201, 168, 130, 0.4));
-            animation: pulse 1.5s ease-in-out;
+            stroke-width: 2.5;
+            filter: drop-shadow(0 6px 20px rgba(201, 168, 130, 0.5));
+            animation: gentlePulse 2s ease-in-out infinite;
         }
 
-        @keyframes pulse {
+        @keyframes gentlePulse {
             0%, 100% {
                 transform: scale(1);
+                opacity: 1;
             }
             50% {
-                transform: scale(1.02);
+                transform: scale(1.03);
+                opacity: 0.95;
             }
         }
 
@@ -370,52 +377,89 @@
             <h2 class="diagram-title">Reception Layout</h2>
             <div id="loading" class="loading">Loading seating chart...</div>
             <div class="venue-layout" id="venueDiagram" style="display: none;">
-                <svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Ceremony seating (top) -->
-                    <text x="300" y="30" class="table-label" style="font-size: 12px; opacity: 0.5;">Ceremony</text>
+                <svg viewBox="0 0 700 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Title -->
+                    <text x="350" y="35" class="table-label" style="font-size: 16px; letter-spacing: 0.1em;">RECEPTION SEATING</text>
                     
-                    <!-- Sweetheart table (left side) -->
-                    <rect class="table" id="sweetheart" x="80" y="420" width="60" height="40" rx="2"/>
-                    <text x="110" y="445" class="table-label" style="font-size: 11px;">Sweetheart</text>
+                    <!-- Legend at top -->
+                    <text x="50" y="70" style="font-size: 11px; fill: var(--warm-gray); opacity: 0.7;">Sweetheart Table</text>
+                    <text x="350" y="70" style="font-size: 11px; fill: var(--warm-gray); opacity: 0.7;">Table 1 (Sections A-G)</text>
+                    <text x="350" y="330" style="font-size: 11px; fill: var(--warm-gray); opacity: 0.7;">Table 2 (Sections A-G)</text>
                     
-                    <!-- Table 1 (top long table) - 7 sections -->
-                    <rect class="table" id="table1" x="200" y="380" width="320" height="50" rx="2"/>
-                    <text x="360" y="375" class="table-label">Table 1</text>
+                    <!-- Sweetheart Table (elegant rounded rectangle) -->
+                    <rect class="table table-section" id="sweetheart" x="60" y="90" width="80" height="50" rx="4"/>
+                    <text x="100" y="120" class="table-label" style="font-size: 12px;">Scott &</text>
+                    <text x="100" y="133" class="table-label" style="font-size: 12px;">Melinda</text>
                     
-                    <!-- Table 1 sections (A closest to sweetheart) -->
-                    <circle class="section" id="section-1-A" cx="220" cy="405" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-1-B" cx="265" cy="405" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-1-C" cx="310" cy="405" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-1-D" cx="355" cy="405" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-1-E" cx="400" cy="405" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-1-F" cx="445" cy="405" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-1-G" cx="490" cy="405" r="10" fill="var(--accent)" opacity="0"/>
+                    <!-- Table 1 - Individual sections (A-G) -->
+                    <!-- Section A (closest to sweetheart) -->
+                    <rect class="table table-section" id="section-1-A" x="200" y="90" width="60" height="120" rx="3"/>
+                    <text x="230" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">A</text>
                     
-                    <!-- Table 2 (bottom long table) - 7 sections -->
-                    <rect class="table" id="table2" x="200" y="480" width="320" height="50" rx="2"/>
-                    <text x="360" y="475" class="table-label">Table 2</text>
+                    <!-- Section B -->
+                    <rect class="table table-section" id="section-1-B" x="270" y="90" width="60" height="120" rx="3"/>
+                    <text x="300" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">B</text>
                     
-                    <!-- Table 2 sections (A closest to sweetheart) -->
-                    <circle class="section" id="section-2-A" cx="220" cy="505" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-2-B" cx="265" cy="505" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-2-C" cx="310" cy="505" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-2-D" cx="355" cy="505" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-2-E" cx="400" cy="505" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-2-F" cx="445" cy="505" r="10" fill="var(--accent)" opacity="0"/>
-                    <circle class="section" id="section-2-G" cx="490" cy="505" r="10" fill="var(--accent)" opacity="0"/>
+                    <!-- Section C -->
+                    <rect class="table table-section" id="section-1-C" x="340" y="90" width="60" height="120" rx="3"/>
+                    <text x="370" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">C</text>
                     
-                    <!-- Kids table (small, left side) -->
-                    <circle class="table" id="kidsTable" cx="110" cy="330" r="25"/>
-                    <text x="110" y="310" class="table-label" style="font-size: 10px;">Kids</text>
+                    <!-- Section D -->
+                    <rect class="table table-section" id="section-1-D" x="410" y="90" width="60" height="120" rx="3"/>
+                    <text x="440" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">D</text>
                     
-                    <!-- Dance floor (right side) -->
-                    <rect x="540" y="600" width="50" height="60" fill="none" stroke="var(--warm-gray)" stroke-width="1" stroke-dasharray="4 4" rx="2"/>
-                    <text x="565" y="635" class="table-label" style="font-size: 10px;">Dance</text>
-                    <text x="565" y="648" class="table-label" style="font-size: 10px;">Floor</text>
+                    <!-- Section E -->
+                    <rect class="table table-section" id="section-1-E" x="480" y="90" width="60" height="120" rx="3"/>
+                    <text x="510" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">E</text>
                     
-                    <!-- Bar -->
-                    <rect x="480" y="700" width="80" height="30" fill="none" stroke="var(--warm-gray)" stroke-width="1" rx="2"/>
-                    <text x="520" y="720" class="table-label" style="font-size: 10px;">Bar</text>
+                    <!-- Section F -->
+                    <rect class="table table-section" id="section-1-F" x="550" y="90" width="60" height="120" rx="3"/>
+                    <text x="580" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">F</text>
+                    
+                    <!-- Section G -->
+                    <rect class="table table-section" id="section-1-G" x="620" y="90" width="60" height="120" rx="3"/>
+                    <text x="650" y="155" class="table-label" style="font-size: 13px; font-weight: 600;">G</text>
+                    
+                    <!-- Divider -->
+                    <line x1="50" y1="270" x2="690" y2="270" stroke="var(--warm-gray)" stroke-width="1" opacity="0.2" stroke-dasharray="4 4"/>
+                    
+                    <!-- Table 2 - Individual sections (A-G) -->
+                    <!-- Section A (closest to sweetheart) -->
+                    <rect class="table table-section" id="section-2-A" x="200" y="350" width="60" height="120" rx="3"/>
+                    <text x="230" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">A</text>
+                    
+                    <!-- Section B -->
+                    <rect class="table table-section" id="section-2-B" x="270" y="350" width="60" height="120" rx="3"/>
+                    <text x="300" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">B</text>
+                    
+                    <!-- Section C -->
+                    <rect class="table table-section" id="section-2-C" x="340" y="350" width="60" height="120" rx="3"/>
+                    <text x="370" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">C</text>
+                    
+                    <!-- Section D -->
+                    <rect class="table table-section" id="section-2-D" x="410" y="350" width="60" height="120" rx="3"/>
+                    <text x="440" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">D</text>
+                    
+                    <!-- Section E -->
+                    <rect class="table table-section" id="section-2-E" x="480" y="350" width="60" height="120" rx="3"/>
+                    <text x="510" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">E</text>
+                    
+                    <!-- Section F -->
+                    <rect class="table table-section" id="section-2-F" x="550" y="350" width="60" height="120" rx="3"/>
+                    <text x="580" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">F</text>
+                    
+                    <!-- Section G -->
+                    <rect class="table table-section" id="section-2-G" x="620" y="350" width="60" height="120" rx="3"/>
+                    <text x="650" y="415" class="table-label" style="font-size: 13px; font-weight: 600;">G</text>
+                    
+                    <!-- Kids Table (small, elegant) -->
+                    <circle class="table table-section" id="kidsTable" cx="100" y="250" r="30"/>
+                    <text x="100" y="253" class="table-label" style="font-size: 11px;">Kids</text>
+                    <text x="100" y="266" class="table-label" style="font-size: 11px;">Table</text>
+                    
+                    <!-- Dance Floor indicator -->
+                    <rect x="60" y="520" width="100" height="60" fill="none" stroke="var(--warm-gray)" stroke-width="1.5" stroke-dasharray="5 5" rx="3" opacity="0.4"/>
+                    <text x="110" y="555" class="table-label" style="font-size: 11px; opacity: 0.6;">Dance Floor</text>
                 </svg>
             </div>
 
@@ -531,7 +575,7 @@
         // Show guest's seating info
         function showGuestSeating(guest) {
             // Clear previous highlights
-            document.querySelectorAll('.table, .section').forEach(el => {
+            document.querySelectorAll('.table, .section, .table-section').forEach(el => {
                 el.classList.remove('highlight', 'show');
             });
 
@@ -562,21 +606,17 @@
             `;
             resultDiv.classList.add('show');
 
-            // Highlight on diagram
+            // Highlight on diagram - only the specific section
             if (guest.table === 'Sweetheart') {
                 document.getElementById('sweetheart')?.classList.add('highlight');
             } else if (guest.table === 'Kids') {
                 document.getElementById('kidsTable')?.classList.add('highlight');
             } else {
-                // Highlight the table
-                const tableId = `table${guest.table}`;
-                document.getElementById(tableId)?.classList.add('highlight');
-                
-                // Highlight the section
+                // Highlight just the specific section rectangle
                 const sectionId = `section-${guest.table}-${guest.section}`;
                 const sectionEl = document.getElementById(sectionId);
                 if (sectionEl) {
-                    sectionEl.classList.add('show');
+                    sectionEl.classList.add('highlight');
                 }
             }
         }
@@ -605,14 +645,9 @@
 
             // Show dropdown with matches
             autocompleteDropdown.innerHTML = matchingGuests.map((guest, index) => {
-                const tableText = guest.table === 'Sweetheart' 
-                    ? 'Sweetheart Table'
-                    : `Table ${guest.table}-${guest.section}`;
-                
                 return `
                     <div class="autocomplete-item" data-index="${index}">
                         <div class="name">${guest.name}</div>
-                        <div class="detail">${tableText}</div>
                     </div>
                 `;
             }).join('');
@@ -626,7 +661,7 @@
             const searchTerm = e.target.value.trim();
             
             // Clear previous highlights
-            document.querySelectorAll('.table, .section').forEach(el => {
+            document.querySelectorAll('.table, .section, .table-section').forEach(el => {
                 el.classList.remove('highlight', 'show');
             });
 
