@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Seat - Scott & Melinda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sand: #F5F1E8;
+            --warm-gray: #9B8E7E;
+            --dark-gray: #4A4238;
+            --accent: #C9A882;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--sand);
+            color: var(--dark-gray);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+            letter-spacing: 0.02em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--warm-gray);
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .search-section {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 2px;
+            box-shadow: 0 2px 20px rgba(74, 66, 56, 0.08);
+            margin-bottom: 3rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            font-family: 'Lato', sans-serif;
+            border: 1px solid var(--warm-gray);
+            background: var(--white);
+            color: var(--dark-gray);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(201, 168, 130, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--warm-gray);
+            opacity: 0.6;
+        }
+
+        .result {
+            padding: 1.5rem;
+            background: var(--sand);
+            border-radius: 2px;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .result.show {
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            font-weight: 400;
+        }
+
+        .result-detail {
+            font-size: 0.9rem;
+            color: var(--warm-gray);
+        }
+
+        .diagram-section {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 2px;
+            box-shadow: 0 2px 20px rgba(74, 66, 56, 0.08);
+            animation: fadeIn 0.6s ease-out 0.2s both;
+        }
+
+        .diagram-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark-gray);
+            font-weight: 400;
+        }
+
+        .venue-layout {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            aspect-ratio: 3/4;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .table {
+            fill: var(--sand);
+            stroke: var(--warm-gray);
+            stroke-width: 2;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .table.highlight {
+            fill: var(--accent);
+            stroke: var(--accent);
+            stroke-width: 3;
+            filter: drop-shadow(0 4px 12px rgba(201, 168, 130, 0.4));
+            animation: pulse 1.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .section {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .section.show {
+            opacity: 1;
+            animation: sectionHighlight 0.6s ease-out;
+        }
+
+        @keyframes sectionHighlight {
+            0% {
+                opacity: 0;
+                r: 8;
+            }
+            50% {
+                opacity: 1;
+                r: 12;
+            }
+            100% {
+                opacity: 1;
+                r: 10;
+            }
+        }
+
+        .table-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            fill: var(--dark-gray);
+            text-anchor: middle;
+        }
+
+        .legend {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--warm-gray);
+            opacity: 0.7;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--warm-gray);
+        }
+
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 2px;
+            border: 1px solid var(--warm-gray);
+        }
+
+        .legend-box.sweetheart {
+            background: var(--sand);
+        }
+
+        .legend-box.long-table {
+            background: var(--sand);
+        }
+
+        .legend-box.kids {
+            background: var(--sand);
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--warm-gray);
+            padding: 2rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .search-section,
+            .diagram-section {
+                padding: 1.5rem;
+            }
+
+            .venue-layout {
+                aspect-ratio: 2/3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Scott & Melinda</h1>
+        <p class="subtitle">FIND YOUR SEAT</p>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Enter your name..."
+                    autocomplete="off"
+                >
+            </div>
+            <div class="result" id="result">
+                <div class="result-detail">Search for your name to find your seat</div>
+            </div>
+        </div>
+
+        <div class="diagram-section">
+            <h2 class="diagram-title">Reception Layout</h2>
+            <div id="loading" class="loading">Loading seating chart...</div>
+            <div class="venue-layout" id="venueDiagram" style="display: none;">
+                <svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Ceremony seating (top) -->
+                    <text x="300" y="30" class="table-label" style="font-size: 12px; opacity: 0.5;">Ceremony</text>
+                    
+                    <!-- Sweetheart table (left side) -->
+                    <rect class="table" id="sweetheart" x="80" y="420" width="60" height="40" rx="2"/>
+                    <text x="110" y="445" class="table-label" style="font-size: 11px;">Sweetheart</text>
+                    
+                    <!-- Table 1 (top long table) - 7 sections -->
+                    <rect class="table" id="table1" x="200" y="380" width="320" height="50" rx="2"/>
+                    <text x="360" y="375" class="table-label">Table 1</text>
+                    
+                    <!-- Table 1 sections (A closest to sweetheart) -->
+                    <circle class="section" id="section-1-A" cx="220" cy="405" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-1-B" cx="265" cy="405" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-1-C" cx="310" cy="405" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-1-D" cx="355" cy="405" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-1-E" cx="400" cy="405" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-1-F" cx="445" cy="405" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-1-G" cx="490" cy="405" r="10" fill="var(--accent)" opacity="0"/>
+                    
+                    <!-- Table 2 (bottom long table) - 7 sections -->
+                    <rect class="table" id="table2" x="200" y="480" width="320" height="50" rx="2"/>
+                    <text x="360" y="475" class="table-label">Table 2</text>
+                    
+                    <!-- Table 2 sections (A closest to sweetheart) -->
+                    <circle class="section" id="section-2-A" cx="220" cy="505" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-2-B" cx="265" cy="505" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-2-C" cx="310" cy="505" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-2-D" cx="355" cy="505" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-2-E" cx="400" cy="505" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-2-F" cx="445" cy="505" r="10" fill="var(--accent)" opacity="0"/>
+                    <circle class="section" id="section-2-G" cx="490" cy="505" r="10" fill="var(--accent)" opacity="0"/>
+                    
+                    <!-- Kids table (small, left side) -->
+                    <circle class="table" id="kidsTable" cx="110" cy="330" r="25"/>
+                    <text x="110" y="310" class="table-label" style="font-size: 10px;">Kids</text>
+                    
+                    <!-- Dance floor (right side) -->
+                    <rect x="540" y="600" width="50" height="60" fill="none" stroke="var(--warm-gray)" stroke-width="1" stroke-dasharray="4 4" rx="2"/>
+                    <text x="565" y="635" class="table-label" style="font-size: 10px;">Dance</text>
+                    <text x="565" y="648" class="table-label" style="font-size: 10px;">Floor</text>
+                    
+                    <!-- Bar -->
+                    <rect x="480" y="700" width="80" height="30" fill="none" stroke="var(--warm-gray)" stroke-width="1" rx="2"/>
+                    <text x="520" y="720" class="table-label" style="font-size: 10px;">Bar</text>
+                </svg>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-box sweetheart"></div>
+                    <span>Sweetheart Table</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box long-table"></div>
+                    <span>Long Tables (4 guests per section A-G)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box kids"></div>
+                    <span>Kids Table (optional)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Published Google Sheet CSV URL
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTnii7jdJ1CNlEotrqzCs1nQRv7OR2iT7nqeyCYem0wRXGCL4RRKC8Awr-M963Nr18Xr4j2J71WV5vd/pub?gid=0&single=true&output=csv';
+        
+        let guestData = [];
+
+        // Fetch and parse Google Sheet data
+        async function loadGuestData() {
+            try {
+                const response = await fetch(SHEET_URL);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const csvText = await response.text();
+                
+                console.log('CSV Data received:', csvText); // Debug log
+                
+                if (!csvText || csvText.trim().length === 0) {
+                    throw new Error('Empty response from Google Sheet');
+                }
+                
+                // Parse CSV - handle both comma and semicolon separators
+                const lines = csvText.split('\n');
+                const headers = lines[0];
+                
+                console.log('Headers:', headers); // Debug log
+                
+                // Skip header row and process data
+                const rows = lines.slice(1);
+                guestData = rows
+                    .filter(row => row.trim())
+                    .map(row => {
+                        // Try to intelligently parse CSV handling quotes
+                        const values = [];
+                        let current = '';
+                        let inQuotes = false;
+                        
+                        for (let i = 0; i < row.length; i++) {
+                            const char = row[i];
+                            
+                            if (char === '"') {
+                                inQuotes = !inQuotes;
+                            } else if (char === ',' && !inQuotes) {
+                                values.push(current.trim());
+                                current = '';
+                            } else {
+                                current += char;
+                            }
+                        }
+                        values.push(current.trim()); // Push last value
+                        
+                        const [name, table, section, coupleId, notes] = values;
+                        return { 
+                            name: name || '', 
+                            table: table || '', 
+                            section: section || '', 
+                            coupleId: coupleId || '', 
+                            notes: notes || '' 
+                        };
+                    })
+                    .filter(guest => guest.name); // Only keep rows with names
+                
+                console.log('Parsed guest data:', guestData); // Debug log
+                
+                if (guestData.length === 0) {
+                    throw new Error('No guest data found in sheet');
+                }
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('venueDiagram').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading guest data:', error);
+                document.getElementById('loading').innerHTML = `
+                    <div style="color: var(--warm-gray); text-align: center;">
+                        <p style="margin-bottom: 1rem;">Unable to load seating data</p>
+                        <p style="font-size: 0.85rem; opacity: 0.8;">Error: ${error.message}</p>
+                        <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 0.5rem;">Please refresh the page or contact Scott & Melinda</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const resultDiv = document.getElementById('result');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            // Clear previous highlights
+            document.querySelectorAll('.table, .section').forEach(el => {
+                el.classList.remove('highlight', 'show');
+            });
+
+            if (searchTerm.length < 2) {
+                resultDiv.innerHTML = '<div class="result-detail">Search for your name to find your seat</div>';
+                resultDiv.classList.remove('show');
+                return;
+            }
+
+            // Find matching guest
+            const guest = guestData.find(g => 
+                g.name.toLowerCase().includes(searchTerm)
+            );
+
+            if (guest) {
+                // Show result
+                const tableText = guest.table === 'Sweetheart' 
+                    ? 'Sweetheart Table'
+                    : `Table ${guest.table}-${guest.section}`;
+                
+                // Find who they're seated with (same couple_ID)
+                let seatedWith = '';
+                if (guest.coupleId && guest.coupleId !== '') {
+                    const companions = guestData.filter(g => 
+                        g.coupleId === guest.coupleId && 
+                        g.name.toLowerCase() !== guest.name.toLowerCase()
+                    );
+                    
+                    if (companions.length > 0) {
+                        const companionNames = companions.map(c => c.name).join(', ');
+                        seatedWith = `with ${companionNames}`;
+                    }
+                }
+                
+                const detailText = seatedWith || guest.notes || 'See you there!';
+                
+                resultDiv.innerHTML = `
+                    <div class="result-text">${tableText}</div>
+                    <div class="result-detail">${detailText}</div>
+                `;
+                resultDiv.classList.add('show');
+
+                // Highlight on diagram
+                if (guest.table === 'Sweetheart') {
+                    document.getElementById('sweetheart')?.classList.add('highlight');
+                } else if (guest.table === 'Kids') {
+                    document.getElementById('kidsTable')?.classList.add('highlight');
+                } else {
+                    // Highlight the table
+                    const tableId = `table${guest.table}`;
+                    document.getElementById(tableId)?.classList.add('highlight');
+                    
+                    // Highlight the section
+                    const sectionId = `section-${guest.table}-${guest.section}`;
+                    const sectionEl = document.getElementById(sectionId);
+                    if (sectionEl) {
+                        sectionEl.classList.add('show');
+                    }
+                }
+            } else {
+                resultDiv.innerHTML = '<div class="result-detail">No match found. Try entering your full name.</div>';
+                resultDiv.classList.add('show');
+            }
+        });
+
+        // Load data on page load
+        loadGuestData();
+    </script>
+</body>
+</html>
