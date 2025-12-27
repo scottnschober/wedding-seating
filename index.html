@@ -377,137 +377,175 @@
             <h2 class="diagram-title">Reception Layout</h2>
             <div id="loading" class="loading">Loading seating chart...</div>
             <div class="venue-layout" id="venueDiagram" style="display: none;">
-                <svg viewBox="0 0 700 600" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
                     <!-- Title -->
-                    <text x="350" y="35" class="table-label" style="font-size: 16px; letter-spacing: 0.1em;">RECEPTION SEATING</text>
-                    
-                    <!-- Legend at top -->
-                    <text x="50" y="70" style="font-size: 11px; fill: var(--warm-gray); opacity: 0.7;">Sweetheart Table</text>
-                    <text x="350" y="70" style="font-size: 11px; fill: var(--warm-gray); opacity: 0.7;">Table 1 (Sections A-G)</text>
-                    <text x="350" y="330" style="font-size: 11px; fill: var(--warm-gray); opacity: 0.7;">Table 2 (Sections A-G)</text>
+                    <text x="400" y="35" class="table-label" style="font-size: 16px; letter-spacing: 0.1em;">RECEPTION SEATING</text>
                     
                     <!-- Sweetheart Table -->
-                    <rect class="table table-section" id="sweetheart" x="60" y="90" width="80" height="50" rx="4"/>
-                    <text x="100" y="120" class="table-label" style="font-size: 12px;">Scott &</text>
-                    <text x="100" y="133" class="table-label" style="font-size: 12px;">Melinda</text>
+                    <g id="sweetheart-group">
+                        <rect class="table table-section" id="sweetheart" x="50" y="120" width="60" height="100" rx="3"/>
+                        <text x="80" y="110" class="table-label" style="font-size: 11px; opacity: 0.7;">Sweetheart</text>
+                    </g>
                     
-                    <!-- Table 1 - Long continuous table -->
-                    <rect class="table-base" x="200" y="120" width="480" height="60" rx="3" fill="var(--white)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                    <!-- Table 1 -->
+                    <g id="table1-group">
+                        <text x="400" y="80" class="table-label" style="font-size: 12px; opacity: 0.7;">Table 1</text>
+                        
+                        <!-- Main table rectangle -->
+                        <rect x="150" y="120" width="560" height="100" rx="3" fill="var(--white)" stroke="var(--warm-gray)" stroke-width="2"/>
+                        
+                        <!-- Section divider lines -->
+                        <line x1="230" y1="120" x2="230" y2="220" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        <line x1="310" y1="120" x2="310" y2="220" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        <line x1="390" y1="120" x2="390" y2="220" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        <line x1="470" y1="120" x2="470" y2="220" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        <line x1="550" y1="120" x2="550" y2="220" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        <line x1="630" y1="120" x2="630" y2="220" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        
+                        <!-- Invisible overlays for highlighting sections -->
+                        <rect class="section-overlay" id="section-1-A" x="150" y="120" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-1-B" x="230" y="120" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-1-C" x="310" y="120" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-1-D" x="390" y="120" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-1-E" x="470" y="120" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-1-F" x="550" y="120" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-1-G" x="630" y="120" width="80" height="100" rx="3"/>
+                        
+                        <!-- Top chairs -->
+                        <rect x="160" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="200" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="240" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="280" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="320" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="360" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="400" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="440" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="480" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="520" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="560" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="600" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="640" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="680" y="95" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <!-- Bottom chairs -->
+                        <rect x="160" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="200" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="240" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="280" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="320" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="360" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="400" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="440" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="480" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="520" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="560" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="600" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="640" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="680" y="225" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <!-- Section labels -->
+                        <text x="190" y="175" class="table-label" style="font-size: 13px; opacity: 0.5;">A</text>
+                        <text x="270" y="175" class="table-label" style="font-size: 13px; opacity: 0.5;">B</text>
+                        <text x="350" y="175" class="table-label" style="font-size: 13px; opacity: 0.5;">C</text>
+                        <text x="430" y="175" class="table-label" style="font-size: 13px; opacity: 0.5;">D</text>
+                        <text x="510" y="175" class="table-label" style="font-size: 13px; opacity: 0.5;">E</text>
+                        <text x="590" y="175" class="table-label" style="font-size: 13px; opacity: 0.5;">F</text>
+                        <text x="670" y="175" class="table-label" style="font-size: 13px; opacity: 0.5;">G</text>
+                    </g>
                     
-                    <!-- Table 1 Section overlays and chairs -->
-                    <rect class="section-overlay" id="section-1-A" x="200" y="100" width="68" height="100" rx="2"/>
-                    <rect x="210" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="240" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="234" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">A</text>
-                    <rect x="210" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="240" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
+                    <!-- Table 2 -->
+                    <g id="table2-group">
+                        <text x="400" y="300" class="table-label" style="font-size: 12px; opacity: 0.7;">Table 2</text>
+                        
+                        <!-- Main table rectangle -->
+                        <rect x="150" y="340" width="560" height="100" rx="3" fill="var(--white)" stroke="var(--warm-gray)" stroke-width="2"/>
+                        
+                        <!-- Section divider lines -->
+                        <line x1="230" y1="340" x2="230" y2="440" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        <line x1="310" y1="340" x2="310" y2="440" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        <line x1="390" y1="340" x2="390" y2="440" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        <line x1="470" y1="340" x2="470" y2="440" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        <line x1="550" y1="340" x2="550" y2="440" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        <line x1="630" y1="340" x2="630" y2="440" stroke="var(--warm-gray)" stroke-width="1" opacity="0.3"/>
+                        
+                        <!-- Invisible overlays for highlighting sections -->
+                        <rect class="section-overlay" id="section-2-A" x="150" y="340" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-2-B" x="230" y="340" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-2-C" x="310" y="340" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-2-D" x="390" y="340" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-2-E" x="470" y="340" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-2-F" x="550" y="340" width="80" height="100" rx="3"/>
+                        <rect class="section-overlay" id="section-2-G" x="630" y="340" width="80" height="100" rx="3"/>
+                        
+                        <!-- Top chairs -->
+                        <rect x="160" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="200" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="240" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="280" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="320" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="360" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="400" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="440" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="480" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="520" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="560" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="600" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="640" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="680" y="315" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <!-- Bottom chairs -->
+                        <rect x="160" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="200" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="240" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="280" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="320" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="360" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="400" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="440" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="480" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="520" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="560" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="600" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <rect x="640" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        <rect x="680" y="445" width="20" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1.5"/>
+                        
+                        <!-- Section labels -->
+                        <text x="190" y="395" class="table-label" style="font-size: 13px; opacity: 0.5;">A</text>
+                        <text x="270" y="395" class="table-label" style="font-size: 13px; opacity: 0.5;">B</text>
+                        <text x="350" y="395" class="table-label" style="font-size: 13px; opacity: 0.5;">C</text>
+                        <text x="430" y="395" class="table-label" style="font-size: 13px; opacity: 0.5;">D</text>
+                        <text x="510" y="395" class="table-label" style="font-size: 13px; opacity: 0.5;">E</text>
+                        <text x="590" y="395" class="table-label" style="font-size: 13px; opacity: 0.5;">F</text>
+                        <text x="670" y="395" class="table-label" style="font-size: 13px; opacity: 0.5;">G</text>
+                    </g>
                     
-                    <rect class="section-overlay" id="section-1-B" x="268" y="100" width="68" height="100" rx="2"/>
-                    <rect x="278" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="308" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="302" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">B</text>
-                    <rect x="278" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="308" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <rect class="section-overlay" id="section-1-C" x="336" y="100" width="68" height="100" rx="2"/>
-                    <rect x="346" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="376" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="370" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">C</text>
-                    <rect x="346" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="376" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <rect class="section-overlay" id="section-1-D" x="404" y="100" width="68" height="100" rx="2"/>
-                    <rect x="414" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="444" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="438" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">D</text>
-                    <rect x="414" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="444" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <rect class="section-overlay" id="section-1-E" x="472" y="100" width="68" height="100" rx="2"/>
-                    <rect x="482" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="512" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="506" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">E</text>
-                    <rect x="482" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="512" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <rect class="section-overlay" id="section-1-F" x="540" y="100" width="68" height="100" rx="2"/>
-                    <rect x="550" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="580" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="574" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">F</text>
-                    <rect x="550" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="580" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <rect class="section-overlay" id="section-1-G" x="608" y="100" width="68" height="100" rx="2"/>
-                    <rect x="618" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="648" y="100" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="642" y="94" class="table-label" style="font-size: 10px; opacity: 0.6;">G</text>
-                    <rect x="618" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="648" y="180" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <!-- Divider -->
-                    <line x1="50" y1="270" x2="690" y2="270" stroke="var(--warm-gray)" stroke-width="1" opacity="0.2" stroke-dasharray="4 4"/>
-                    
-                    <!-- Table 2 - Long continuous table -->
-                    <rect class="table-base" x="200" y="380" width="480" height="60" rx="3" fill="var(--white)" stroke="var(--warm-gray)" stroke-width="1.5"/>
-                    
-                    <!-- Table 2 Section overlays and chairs -->
-                    <rect class="section-overlay" id="section-2-A" x="200" y="360" width="68" height="100" rx="2"/>
-                    <rect x="210" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="240" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="234" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">A</text>
-                    <rect x="210" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="240" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <rect class="section-overlay" id="section-2-B" x="268" y="360" width="68" height="100" rx="2"/>
-                    <rect x="278" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="308" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="302" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">B</text>
-                    <rect x="278" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="308" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <rect class="section-overlay" id="section-2-C" x="336" y="360" width="68" height="100" rx="2"/>
-                    <rect x="346" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="376" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="370" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">C</text>
-                    <rect x="346" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="376" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <rect class="section-overlay" id="section-2-D" x="404" y="360" width="68" height="100" rx="2"/>
-                    <rect x="414" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="444" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="438" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">D</text>
-                    <rect x="414" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="444" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <rect class="section-overlay" id="section-2-E" x="472" y="360" width="68" height="100" rx="2"/>
-                    <rect x="482" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="512" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="506" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">E</text>
-                    <rect x="482" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="512" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <rect class="section-overlay" id="section-2-F" x="540" y="360" width="68" height="100" rx="2"/>
-                    <rect x="550" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="580" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="574" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">F</text>
-                    <rect x="550" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="580" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <rect class="section-overlay" id="section-2-G" x="608" y="360" width="68" height="100" rx="2"/>
-                    <rect x="618" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="648" y="360" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <text x="642" y="354" class="table-label" style="font-size: 10px; opacity: 0.6;">G</text>
-                    <rect x="618" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    <rect x="648" y="440" width="18" height="20" rx="2" fill="var(--sand)" stroke="var(--warm-gray)" stroke-width="1"/>
-                    
-                    <!-- Kids Table -->
-                    <circle class="table table-section" id="kidsTable" cx="100" cy="250" r="30"/>
-                    <text x="100" y="253" class="table-label" style="font-size: 11px;">Kids</text>
-                    <text x="100" y="266" class="table-label" style="font-size: 11px;">Table</text>
-                    
-                    <!-- Dance Floor -->
-                    <rect x="60" y="520" width="100" height="60" fill="none" stroke="var(--warm-gray)" stroke-width="1.5" stroke-dasharray="5 5" rx="3" opacity="0.4"/>
-                    <text x="110" y="555" class="table-label" style="font-size: 11px; opacity: 0.6;">Dance Floor</text>
+                    <!-- Kids Table (optional) -->
+                    <circle class="table table-section" id="kidsTable" cx="80" cy="280" r="25"/>
+                    <text x="80" y="265" class="table-label" style="font-size: 10px; opacity: 0.6;">Kids</text>
                 </svg>
             </div>
 
