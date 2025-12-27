@@ -633,7 +633,7 @@
         // Show guest's seating info
         function showGuestSeating(guest) {
             // Clear previous highlights
-            document.querySelectorAll('.table, .section, .table-section').forEach(el => {
+            document.querySelectorAll('.table, .section, .table-section, .section-overlay').forEach(el => {
                 el.classList.remove('highlight', 'show');
             });
 
@@ -719,7 +719,7 @@
             const searchTerm = e.target.value.trim();
             
             // Clear previous highlights
-            document.querySelectorAll('.table, .section, .table-section').forEach(el => {
+            document.querySelectorAll('.table, .section, .table-section, .section-overlay').forEach(el => {
                 el.classList.remove('highlight', 'show');
             });
 
