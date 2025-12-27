@@ -80,6 +80,65 @@
             margin-bottom: 1.5rem;
         }
 
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border: 1px solid var(--warm-gray);
+            border-top: none;
+            border-radius: 0 0 2px 2px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(74, 66, 56, 0.15);
+            display: none;
+        }
+
+        .autocomplete-dropdown.show {
+            display: block;
+            animation: slideDown 0.2s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .autocomplete-item {
+            padding: 0.875rem 1.25rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border-bottom: 1px solid rgba(155, 142, 126, 0.1);
+        }
+
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+
+        .autocomplete-item:hover,
+        .autocomplete-item.selected {
+            background: var(--sand);
+        }
+
+        .autocomplete-item .name {
+            font-weight: 400;
+            color: var(--dark-gray);
+            margin-bottom: 0.25rem;
+        }
+
+        .autocomplete-item .detail {
+            font-size: 0.85rem;
+            color: var(--warm-gray);
+        }
+
         input[type="text"] {
             width: 100%;
             padding: 1rem 1.25rem;
@@ -300,6 +359,7 @@
                     placeholder="Enter your name..."
                     autocomplete="off"
                 >
+                <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
             </div>
             <div class="result" id="result">
                 <div class="result-detail">Search for your name to find your seat</div>
@@ -461,12 +521,109 @@
             }
         }
 
-        // Search functionality
+        // Search functionality with autocomplete
         const searchInput = document.getElementById('searchInput');
         const resultDiv = document.getElementById('result');
+        const autocompleteDropdown = document.getElementById('autocompleteDropdown');
+        let selectedIndex = -1;
+        let matchingGuests = [];
 
+        // Show guest's seating info
+        function showGuestSeating(guest) {
+            // Clear previous highlights
+            document.querySelectorAll('.table, .section').forEach(el => {
+                el.classList.remove('highlight', 'show');
+            });
+
+            // Show result
+            const tableText = guest.table === 'Sweetheart' 
+                ? 'Sweetheart Table'
+                : `Table ${guest.table}-${guest.section}`;
+            
+            // Find who they're seated with (same couple_ID)
+            let seatedWith = '';
+            if (guest.coupleId && guest.coupleId !== '') {
+                const companions = guestData.filter(g => 
+                    g.coupleId === guest.coupleId && 
+                    g.name.toLowerCase() !== guest.name.toLowerCase()
+                );
+                
+                if (companions.length > 0) {
+                    const companionNames = companions.map(c => c.name).join(', ');
+                    seatedWith = `with ${companionNames}`;
+                }
+            }
+            
+            const detailText = seatedWith || guest.notes || 'See you there!';
+            
+            resultDiv.innerHTML = `
+                <div class="result-text">${tableText}</div>
+                <div class="result-detail">${detailText}</div>
+            `;
+            resultDiv.classList.add('show');
+
+            // Highlight on diagram
+            if (guest.table === 'Sweetheart') {
+                document.getElementById('sweetheart')?.classList.add('highlight');
+            } else if (guest.table === 'Kids') {
+                document.getElementById('kidsTable')?.classList.add('highlight');
+            } else {
+                // Highlight the table
+                const tableId = `table${guest.table}`;
+                document.getElementById(tableId)?.classList.add('highlight');
+                
+                // Highlight the section
+                const sectionId = `section-${guest.table}-${guest.section}`;
+                const sectionEl = document.getElementById(sectionId);
+                if (sectionEl) {
+                    sectionEl.classList.add('show');
+                }
+            }
+        }
+
+        // Update autocomplete dropdown
+        function updateAutocomplete(searchTerm) {
+            if (searchTerm.length < 2) {
+                autocompleteDropdown.classList.remove('show');
+                autocompleteDropdown.innerHTML = '';
+                matchingGuests = [];
+                selectedIndex = -1;
+                return;
+            }
+
+            // Find matching guests
+            matchingGuests = guestData.filter(g => 
+                g.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            if (matchingGuests.length === 0) {
+                autocompleteDropdown.classList.remove('show');
+                autocompleteDropdown.innerHTML = '';
+                selectedIndex = -1;
+                return;
+            }
+
+            // Show dropdown with matches
+            autocompleteDropdown.innerHTML = matchingGuests.map((guest, index) => {
+                const tableText = guest.table === 'Sweetheart' 
+                    ? 'Sweetheart Table'
+                    : `Table ${guest.table}-${guest.section}`;
+                
+                return `
+                    <div class="autocomplete-item" data-index="${index}">
+                        <div class="name">${guest.name}</div>
+                        <div class="detail">${tableText}</div>
+                    </div>
+                `;
+            }).join('');
+
+            autocompleteDropdown.classList.add('show');
+            selectedIndex = -1;
+        }
+
+        // Handle input
         searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase().trim();
+            const searchTerm = e.target.value.trim();
             
             // Clear previous highlights
             document.querySelectorAll('.table, .section').forEach(el => {
@@ -476,62 +633,85 @@
             if (searchTerm.length < 2) {
                 resultDiv.innerHTML = '<div class="result-detail">Search for your name to find your seat</div>';
                 resultDiv.classList.remove('show');
+                updateAutocomplete(searchTerm);
                 return;
             }
 
-            // Find matching guest
-            const guest = guestData.find(g => 
-                g.name.toLowerCase().includes(searchTerm)
-            );
+            updateAutocomplete(searchTerm);
 
-            if (guest) {
-                // Show result
-                const tableText = guest.table === 'Sweetheart' 
-                    ? 'Sweetheart Table'
-                    : `Table ${guest.table}-${guest.section}`;
-                
-                // Find who they're seated with (same couple_ID)
-                let seatedWith = '';
-                if (guest.coupleId && guest.coupleId !== '') {
-                    const companions = guestData.filter(g => 
-                        g.coupleId === guest.coupleId && 
-                        g.name.toLowerCase() !== guest.name.toLowerCase()
-                    );
-                    
-                    if (companions.length > 0) {
-                        const companionNames = companions.map(c => c.name).join(', ');
-                        seatedWith = `with ${companionNames}`;
-                    }
-                }
-                
-                const detailText = seatedWith || guest.notes || 'See you there!';
-                
-                resultDiv.innerHTML = `
-                    <div class="result-text">${tableText}</div>
-                    <div class="result-detail">${detailText}</div>
-                `;
-                resultDiv.classList.add('show');
-
-                // Highlight on diagram
-                if (guest.table === 'Sweetheart') {
-                    document.getElementById('sweetheart')?.classList.add('highlight');
-                } else if (guest.table === 'Kids') {
-                    document.getElementById('kidsTable')?.classList.add('highlight');
-                } else {
-                    // Highlight the table
-                    const tableId = `table${guest.table}`;
-                    document.getElementById(tableId)?.classList.add('highlight');
-                    
-                    // Highlight the section
-                    const sectionId = `section-${guest.table}-${guest.section}`;
-                    const sectionEl = document.getElementById(sectionId);
-                    if (sectionEl) {
-                        sectionEl.classList.add('show');
-                    }
-                }
-            } else {
+            // If exact match and only one result, show it immediately
+            if (matchingGuests.length === 1) {
+                showGuestSeating(matchingGuests[0]);
+            } else if (matchingGuests.length === 0) {
                 resultDiv.innerHTML = '<div class="result-detail">No match found. Try entering your full name.</div>';
                 resultDiv.classList.add('show');
+            } else {
+                resultDiv.innerHTML = '<div class="result-detail">Select your name from the list above</div>';
+                resultDiv.classList.add('show');
+            }
+        });
+
+        // Handle keyboard navigation
+        searchInput.addEventListener('keydown', (e) => {
+            if (!autocompleteDropdown.classList.contains('show')) return;
+
+            const items = autocompleteDropdown.querySelectorAll('.autocomplete-item');
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+                updateSelection(items);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedIndex = Math.max(selectedIndex - 1, -1);
+                updateSelection(items);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (selectedIndex >= 0 && selectedIndex < matchingGuests.length) {
+                    selectGuest(matchingGuests[selectedIndex]);
+                } else if (matchingGuests.length === 1) {
+                    selectGuest(matchingGuests[0]);
+                }
+            } else if (e.key === 'Escape') {
+                autocompleteDropdown.classList.remove('show');
+                selectedIndex = -1;
+            }
+        });
+
+        // Update visual selection
+        function updateSelection(items) {
+            items.forEach((item, index) => {
+                if (index === selectedIndex) {
+                    item.classList.add('selected');
+                    item.scrollIntoView({ block: 'nearest' });
+                } else {
+                    item.classList.remove('selected');
+                }
+            });
+        }
+
+        // Select a guest from dropdown
+        function selectGuest(guest) {
+            searchInput.value = guest.name;
+            autocompleteDropdown.classList.remove('show');
+            selectedIndex = -1;
+            showGuestSeating(guest);
+        }
+
+        // Handle clicks on dropdown items
+        autocompleteDropdown.addEventListener('click', (e) => {
+            const item = e.target.closest('.autocomplete-item');
+            if (item) {
+                const index = parseInt(item.dataset.index);
+                selectGuest(matchingGuests[index]);
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !autocompleteDropdown.contains(e.target)) {
+                autocompleteDropdown.classList.remove('show');
+                selectedIndex = -1;
             }
         });
 
